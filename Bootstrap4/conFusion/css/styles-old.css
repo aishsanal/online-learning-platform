@@ -1,0 +1,157 @@
+.row-header{
+	margin: 0px auto;
+	padding: 0px auto;
+}
+
+.row-content{
+	margin: 0px auto;
+	padding: 50px 0px 50px 0px;
+	border-bottom: 1px ridge;
+	min-height: 400px;
+}
+.form-row{
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.footer{
+	background-color: #D1C4E9;
+	margin: 0px auto;
+	padding: 20px 0px 20px 0px;
+}
+
+.jumbotron{
+	padding: 70px 30px 70px 30px;
+	margin: 0px auto;
+	background: #9575CD;
+	color: floralwhite;
+}
+
+.address{
+	font-size: 80%;
+	margin: 0px;
+	color: #0f0f0f;
+}
+
+.button1{
+	border: none;
+	color: white;
+	padding:10px 25px;
+	text-align: center;
+	border-radius:8px;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 8px 8px;
+	background-color: blue;
+}
+
+.button3{
+	border: none;
+	color: white;
+	padding:10px 25px;
+	text-align: center;
+	border-radius:8px;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 8px 8px;
+}
+
+.button4{
+	border: none;
+	color: white;
+	padding:8px 20px;
+	text-align: center;
+	border-radius:8px;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 4px 0px;
+	background-color: green
+}
+.button5{
+	border: none;
+	color: white;
+	padding:8px 20px;
+	text-align: center;
+	border-radius:8px;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 4px 0px;
+	background: red;
+}
+
+.form-row{
+	color: black;
+}
+
+.modal-header{
+	color: black;
+}
+
+.ph-card-header{
+	color:white;
+	background-color:Red;
+}
+
+.container1{
+	padding-top:50px;
+}
+.button2{
+	border: none;
+	color: white;
+	padding:10px 25px;
+	text-align: center;
+	border-radius:8px;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 4px 2px;
+	background-color: blue;
+}
+
+.split{
+	height: 100%;
+	width: 50%;
+}
+
+.tab-content{
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+}
+
+@media (max-width: 575px) {                  
+   .content-to-hide {
+      display: none;
+   }
+}
+
+.body{
+	padding: 50px 0px 0px 0px;
+	z-index: 0;
+}
+
+.navbar-dark{
+	background-color: #512DA8;
+}
+
+.carousel {
+    background:#512DA8;
+}
+
+.carousel-item {
+  height: 300px;
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+
+
+#carouselButton {
+    right:0px;
+    position: absolute;
+    bottom: 0px;
+    z-index: 1;
+}
