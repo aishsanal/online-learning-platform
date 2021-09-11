@@ -80,12 +80,14 @@ body {
 }	
 
 .sidebar-section{
-  background-color: #512DA8;
+  /* background-color: #512DA8; */
+  background-color: #E7E9EB;
   height: 100%;
   margin-left: 0;
 }
 
 .sidebar-content{
-  color : #fff;
+  /* color : #fff; */
+  color: rgba(0, 0, 0, 0.85);
   padding: 1em;
 }
