@@ -81,7 +81,7 @@ body {
 
 .sidebar-section{
   /* background-color: #512DA8; */
-  background-color: #E7E9EB;
+  background-color: #512da85e;
   height: 100%;
   margin-left: 0;
 }
@@ -90,4 +90,7 @@ body {
   /* color : #fff; */
   color: rgba(0, 0, 0, 0.85);
   padding: 1em;
+}
+.sidebar-list{
+  background-color: #512da85e !important;
 }
