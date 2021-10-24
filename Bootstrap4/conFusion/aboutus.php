@@ -24,12 +24,12 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
 			<span class="Navbar-toggler-icon"></span>
 		</button>
-			<a class="navbar-brand mr-auto" href="./index.html" target="_blank"><img src="img/online-education.png" height="30" width="41"></a>
+			<a class="navbar-brand mr-auto" href="./index.php" target="_blank"><img src="img/online-education.png" height="30" width="41"></a>
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span> Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="./index.php"><span class="fa fa-home fa-lg"></span> Home</a></li>
 					<li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-about fa-lg"></span> About</a></li>
-					<li class="nav-item"><a class="nav-link" href="./contactus.html"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="./contactus.php"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
 				</ul>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
     <div class="container">
         <div class="row">
 			<ol class="col-12 breadcrumb">
-				<li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+				<li class="breadcrumb-item"><a href="./index.php">Home</a></li>
 				<li class="breadcrumb-item active">About Us</li>
 			</ol>
             <div>
@@ -207,9 +207,9 @@
                 <div class="col-4 offset-1 col-sm-2">
                     <h5>Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./index.php">Home</a></li>
                         <li><a href="#">About</a></li>
-                        <li><a href="./contactus.html">Contact</a></li>
+                        <li><a href="./contactus.php">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-7 col-sm-5">

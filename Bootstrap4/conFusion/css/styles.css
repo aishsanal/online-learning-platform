@@ -94,3 +94,19 @@ body {
 .sidebar-list{
   background-color: #512da85e !important;
 }
+
+
+
+
+a:visited {
+  color: #512da85e;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1b0f35e3;
+  background-color: transparent;
+  text-decoration: underline;
+}
+

@@ -22,20 +22,20 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-                <a class="navbar-brand mx-auto" href="index.html"><img src="img/online-education.png" height="30" width="41"></a>
+                <a class="navbar-brand mx-auto" href="index.php"><img src="img/online-education.png" height="30" width="41"></a>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html"> Home<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="index.php"> Home<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="./aboutus.html"></span> About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./contactus.html"> Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./aboutus.php"></span> About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./contactus.php"> Contact</a></li>
                         
                     </ul>
                     
                 
                     
-                    <a href="index.html" class="btn btn-sm btn-danger " id="logout-btn" role="button" aria-pressed="true" >LogOut</a>
+                    <a href="index.php" class="btn btn-sm btn-danger " id="logout-btn" role="button" aria-pressed="true" >LogOut</a>
                 </div>
             <!-- </div> -->
         </nav>

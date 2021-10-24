@@ -1,3 +1,4 @@
+<?php include('./includes/register_validation.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,10 +29,10 @@
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-                        <a class="nav-link" href="./index.html"> Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="./index.php"> Home<span class="sr-only">(current)</span></a>
                     </li>
-					<li class="nav-item"><a class="nav-link" href="./aboutus.html"></span> About</a></li>
-					<li class="nav-item"><a class="nav-link" href="./contactus.html"> Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="./aboutus.php"></span> About</a></li>
+					<li class="nav-item"><a class="nav-link" href="./contactus.php"> Contact</a></li>
                     
 				</ul>
                 
@@ -43,45 +44,67 @@
 				<a>Signup</a>
 				</span> -->
                 
-                <button class="btn btn-sm btn-outline-light ml-auto mr-1" id="login-btn" type="button" data-toggle="modal" data-target="#loginModal" >LogIn</button>
-                <button class="btn btn-success " id="signup-btn" type="button" data-toggle="modal" data-target="#signupModal">SignUp</button>
+                <button class="btn btn-outline-light ml-auto mr-1" id="login-btn" type="button" data-toggle="modal" data-target="#loginModal" >LogIn</button>
+                <button class="btn btn-success ml-1 mr-1" id="signup-btn" type="button" data-toggle="modal" data-target="#signupModal">Register</button>
 			</div>
 		<!-- </div> -->
 	</nav>
 	<div id="signupModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg" role="content">
+        <div class="modal-dialog modal-dialogue-centered modal-md" role="content">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" style="color:white">SignUp </h4>
+                    <h4 class="modal-title" style="color:white">Register </h4>
                     <button type="button" class="close" style="color:white" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-sm-4">
-                                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="Enter email">
+                    <form method="post" action="">
+                        
+                            <div class="form-group ">
+                                    <label class= "font-weight-bold" for="exampleInputEmail3">Email Address</label>
+                                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email">
+                                    <span class="error"><?php echo $emailErr;?></span>
                             </div>
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
+
+                            <div class="form-group ">
+                                <label class= "font-weight-bold" for="exampleInputFirstName3">First Name</label>
+                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name">
+                                <span class="error"><?php echo $fNameErr;?></span>
                             </div>
-							<div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword3">Confirm Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Confirm Password">
+
+                            <div class="form-group ">
+                                <label class= "font-weight-bold" for="exampleInputLastName3">Last Name</label>
+                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name">
+                                <span class="error"><?php echo $lNameErr;?></span>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class= "font-weight-bold" for="exampleInputphoneNumber3">Phone Number</label>
+                                <input type="tel" class="form-control form-control-sm mr-1" id="exampleInputPhoneNumber3" name = "phoneNumber"  placeholder = "Phone Number">
+                                <span class="error"><?php echo $phNumErr;?></span>
+                            </div>
+
+                            <div class="form-group"> <!-- col-sm-6 -->
+                                <label class= "font-weight-bold" for="exampleInputPassword3">Password</label>
+                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "password" placeholder="Enter Password">
+                                <span class="error"><?php echo $pwErr;?></span>
+                            </div>
+							<div class="form-group">
+                                <label class= "font-weight-bold" for="exampleInputPassword3">Confirm Password</label>
+                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "confirmPassword" placeholder="Confirm Password">
+                                <span class="error"><?php echo $cpwErr;?></span>
                             </div>
                             <div class="col-sm-auto">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox">
-                                    <label class="form-check-label"> Remember me
+                                    <label class="form-check-label"> I accept the <a href = "./aboutus.php">Terms of Use</a> and <a href = "./aboutus.php">Privacy Policy</a>
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        
                         <div class="form-row">
                             <button type="button" class="btn btn-secondary btn-sm ml-auto"  data-dismiss="modal" >Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-sm ml-1">Sign up</button>        
+                            <button type="submit" name="register" class="btn btn-primary btn-sm ml-1">Register</button>        
                         </div>
                     </form>
                 </div>
@@ -232,13 +255,13 @@
             </div>
             <div class="col col-sm order-sm-first col-md">
 				<div class="media">
-                <a href="HTML.html">
+                <a href="HTML.php">
 				<img class="d-flex mr-3 img-thumbnail align-self-center"
 							src="img/html.png" alt="html">
                 </a>
 					<div class="media-body ">
                         <h2 class="mt-0">
-						    <a class="mt-0 text-dark" href="HTML.html" >HTML </a>
+						    <a class="mt-0 text-dark" href="HTML.php" >HTML </a>
                         </h2>
 						<p class="d-none d-sm-block">HTML stands for Hyper Text Markup Language. It is the standard markup language for creating Web pages. It describes the structure of a Web page. It consists of a series of elements. HTML elements tell the browser how to display the content</p>
                     </div>
@@ -255,12 +278,12 @@
 				<div class="media">
 					<div class="media-body">
 						<h2 class="mt-0">
-                            <a class="mt-0 text-dark" href="CSS.html">CSS </a>
+                            <a class="mt-0 text-dark" href="CSS.php">CSS </a>
                         </h2>
 						<p class="d-none d-sm-block">CSS stands for Cascading Style Sheets. It describes how HTML elements are to be displayed on screen, paper, or in other media. It saves a lot of work. It can control the layout of multiple web pages all at once</p>
                     </div>
 					<div class="media-right">
-                        <a href="CSS.html">
+                        <a href="CSS.php">
 						    <img class="d-flex mr-3 img-thumbnail align-self-center"
 							    src="img/css.png" alt="css">
                         </a>
@@ -275,12 +298,12 @@
             </div>
             <div class="col col-sm order-sm-first col-md">
 				<div class="media">
-                    <a href="JS.html">
+                    <a href="JS.php">
 					    <img class="d-flex mr-3 img-thumbnail align-self-center w-50"
 						    src="img/js.png" alt="js">
 					</a>
                     <div class="media-body">
-                        <a class="mt-0 text-dark" href="JS.html">
+                        <a class="mt-0 text-dark" href="JS.php">
 						    <h2 class="mt-0">Java Script</h2>
                         </a>
 						<p class="d-none d-sm-block" >JavaScript is the world's most popular programming language. It is the programming language of the Web. It is easy to learn.</p>
@@ -296,12 +319,12 @@
             <div class="col col-sm col-md">
 				<div class="media">
 					<div class="media-body">
-						<h2 class="mt-0"><a class="mt-0 text-dark" href="Java.html" >Java </a> </h2>
+						<h2 class="mt-0"><a class="mt-0 text-dark" href="Java.php" >Java </a> </h2>
 						<p class="d-none d-sm-block">Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere. </p>
                     </div>
                     
 					<div class="media-right">
-                        <a href="Java.html">
+                        <a href="Java.php">
 						<img class="d-flex mr-3 img-thumbnail align-self-center"
 							src="img/java.png" alt="java">
                         </a>
@@ -317,13 +340,13 @@
             </div>
             <div class="col col-sm order-sm-first col-md">
 				<div class="media">
-                    <a href="Ajax.html">
+                    <a href="Ajax.php">
 					<img class="d-flex mr-3 img-thumbnail align-self-center"
 						src="img/ajax.jpg" alt="ajax">
                     </a>
 					<div class="media-body">
 						<h2 class="mt-0">
-                            <a class="mt-0 text-dark" href="Ajax.html" >Ajax <span class="badge badge-danger">NEW</span> 
+                            <a class="mt-0 text-dark" href="Ajax.php" >Ajax <span class="badge badge-danger">NEW</span> 
                             </a>  
                         </h2>
 						<p class="d-none d-sm-block" >Ajax, short for "Asynchronous JavaScript and is a set of web development techniques that uses various web technologies on the client-side to create asynchronous web applications.</p>
@@ -339,11 +362,11 @@
             <div class="col col-sm col-md">
 				<div class="media">
 					<div class="media-body">
-						<h2 class="mt-0"><a class="mt-0 text-dark" href="Python.html" >Python </a></h2>
+						<h2 class="mt-0"><a class="mt-0 text-dark" href="Python.php" >Python </a></h2>
 						<p class="d-none d-sm-block">Python is an interpreted high-level general-purpose programming language. Its design philosophy emphasizes code readability with its use of significant indentation.</p>
                     </div>
 					<div class="media-right">
-                        <a href="Python.html">
+                        <a href="Python.php">
                             <img class="d-flex mr-3 img-thumbnail align-self-center"
 							src="img/python.png" alt="python">
                         </a>
@@ -362,9 +385,9 @@
                     <h5>Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="#">Home</a></li>
-                        <li><a href="./contactus.html">Help and support</a></li>
-                        <li><a href="./aboutus.html">Terms & Conditions</a></li>
-                        <li><a href="./aboutus.html">Privacy policy</a></li>
+                        <li><a href="./contactus.php">Help and support</a></li>
+                        <li><a href="./aboutus.php">Terms & Conditions</a></li>
+                        <li><a href="./aboutus.php">Privacy policy</a></li>
                     </ul>
                 </div>
                 <div class="col-7 col-sm-5 ">
