@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -141,7 +142,8 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>
     <script src="js/filter.js"></script>
-    <script type="text/javascript"> var course = "<?php "html" ?>";</script>
+    <script type="text/javascript"> var course = "html";</script>
+    <script type="text/javascript"> var email = "<?= $_SESSION['userLoggedInemail']?>";</script>
     <script src="js/checkbox.js"></script>
     </body>
 </html>

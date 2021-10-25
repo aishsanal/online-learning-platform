@@ -1,4 +1,4 @@
-<?php include('./includes/register_validation.php') ?>
+<?php include('./includes/register_validation.php'); ?>
 <?php
    
 if(isset($_POST['submit']))
@@ -32,6 +32,7 @@ if(isset($_POST['submit']))
         {
             $_SESSION['userLoggedInName'] = $Fname;
             $_SESSION['userLoggedInemail'] = $emailid;
+            
             header("Location: user_view.php");
         }
         else

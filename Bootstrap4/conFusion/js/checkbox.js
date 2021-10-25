@@ -1,3 +1,4 @@
+//Progress Check
 $('.progress_check').click(function() {
     var form = document.getElementById('progress');
     var inputs = form.getElementsByTagName('input');
@@ -31,6 +32,9 @@ $('.progress_check').click(function() {
         }
     })
 
+console.log(course);
+//Persistent checkboxes
+console.log(email);
 var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {};
 var $checkboxes = $("#progress :checkbox");
 
@@ -38,7 +42,7 @@ $checkboxes.on("change", function(){
   $checkboxes.each(function(){
     checkboxValues[this.id] = this.checked;
   });
-  localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+  localStorage.setItem("emailid", JSON.stringify(checkboxValues));
 });
 
 $.each(checkboxValues, function(key, value) {
