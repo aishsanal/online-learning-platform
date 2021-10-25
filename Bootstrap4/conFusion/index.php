@@ -1,4 +1,146 @@
 <?php include('./includes/register_validation.php') ?>
+<?php
+   
+if(isset($_POST['submit']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    $showAlert = false; 
+    $emailid = $_POST["emailid1"]; 
+    $password = $_POST["password1"]; 
+     
+    $sql = "SELECT * FROM user WHERE emailid='$emailid'";
+    $result = mysqli_query($connect, $sql);
+    $num = mysqli_num_rows($result);
+    
+    // This sql query is use to check if the username is already present or not in our Database
+  
+    if($num != 0) 
+    {
+        $row = mysqli_fetch_array($result);
+        $hash = $row['password'];
+        $Fname = $row['Fname'];
+        if(password_verify($password, $hash))
+        {
+            $_SESSION['userLoggedInName'] = $Fname;
+            $_SESSION['userLoggedInemail'] = $emailid;
+            header("Location: user_view.php");
+        }
+        else
+        {
+            $showAlert = true; 
+        }
+        
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> Wrong emaild or password 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
+<?php
+   
+if(isset($_POST['Submit']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    $showAlert = false; 
+    $showError = false; 
+    $exists=false;
+    
+    $emailid = $_POST["emailid"]; 
+    $password = $_POST["password"]; 
+    $cpassword = $_POST["cpassword"];
+    $Fname = $_POST["Fname"];
+    $Lname = $_POST["Lname"];
+    $phone = $_POST["phone"];
+     
+    //echo("check1");
+    $sql = "SELECT * FROM user WHERE emailid='$emailid'";
+    //echo("check2");
+    $result = mysqli_query($connect, $sql);
+    $num = mysqli_num_rows($result);
+    
+    // This sql query is use to check if the username is already present or not in our Database
+    if($num == 0) {
+        if(($password == $cpassword) && $exists==false) {
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        // Password Hashing is used here. 
+            $sql = "INSERT INTO `user` ( `emailid`, `password`,  `Fname`, `Lname`,  `phone`) VALUES ('$emailid', '$hash','$Fname', '$Lname',  '$phone')";
+            $result = mysqli_query($connect, $sql);
+            if ($result) {
+                $showAlert = true; 
+                $_SESSION['userLoggedInName'] = $Fname;
+                $_SESSION['userLoggedInemail'] = $emailid;
+                header("Location: user_view.php");
+            }
+
+        } 
+        else { 
+            $showError = "Passwords do not match"; 
+        }      
+    }
+    if($num>0) 
+    {
+      $exists="Username not available"; 
+    } 
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Your account is now created. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+    
+    if($showError) {
+        echo '  <div class="alert alert-danger alert-dismissible fade show" role="alert"> 
+                    <strong>Error!</strong> '. $showError.'
+                    <button type="button" class="close" data-dismiss="alert aria-label="Close">
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+   }
+        
+    if($exists) {
+        echo '  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> '. $exists.'
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button>
+                </div> '; 
+     }
+}   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,40 +200,40 @@
                     <button type="button" class="close" style="color:white" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="">
+                    <form name="signup" method="post" action="index.php">
                         
                             <div class="form-group ">
                                     <label class= "font-weight-bold" for="exampleInputEmail3">Email Address</label>
-                                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email">
+                                    <input name="emailid" id="emailid" type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email">
                                     <span class="error"><?php echo $emailErr;?></span>
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputFirstName3">First Name</label>
-                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name">
+                                <input name="Fname" id="Fname" type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name">
                                 <span class="error"><?php echo $fNameErr;?></span>
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputLastName3">Last Name</label>
-                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name">
+                                <input name="Lname" id="Lname" type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name">
                                 <span class="error"><?php echo $lNameErr;?></span>
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputphoneNumber3">Phone Number</label>
-                                <input type="tel" class="form-control form-control-sm mr-1" id="exampleInputPhoneNumber3" name = "phoneNumber"  placeholder = "Phone Number">
+                                <input name="phone" id="phone" type="tel" class="form-control form-control-sm mr-1" id="exampleInputPhoneNumber3" name = "phoneNumber"  placeholder = "Phone Number">
                                 <span class="error"><?php echo $phNumErr;?></span>
                             </div>
 
                             <div class="form-group"> <!-- col-sm-6 -->
                                 <label class= "font-weight-bold" for="exampleInputPassword3">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "password" placeholder="Enter Password">
+                                <input name="password" id="password" type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "password" placeholder="Enter Password">
                                 <span class="error"><?php echo $pwErr;?></span>
                             </div>
 							<div class="form-group">
                                 <label class= "font-weight-bold" for="exampleInputPassword3">Confirm Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "confirmPassword" placeholder="Confirm Password">
+                                <input name="cpassword" id="cpassword" type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "confirmPassword" placeholder="Confirm Password">
                                 <span class="error"><?php echo $cpwErr;?></span>
                             </div>
                             <div class="col-sm-auto">
@@ -104,7 +246,7 @@
                         
                         <div class="form-row">
                             <button type="button" class="btn btn-secondary btn-sm ml-auto"  data-dismiss="modal" >Cancel</button>
-                            <button type="submit" name="register" class="btn btn-primary btn-sm ml-1">Register</button>        
+                            <button type="Submit" name="Submit" value="submit" class="btn btn-primary btn-sm ml-1">Register</button>        
                         </div>
                     </form>
                 </div>
@@ -120,27 +262,20 @@
                     <button type="button" class="close" style="color:white" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="#">
+                    <form name="login" method="post" action="index.php">
                         <div class="form-row">
                             <div class="form-group col-sm-4">
                                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="Enter email">
+                                    <input name="emailid1" id="emailid1" type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="Enter email">
                             </div>
                             <div class="form-group col-sm-4">
                                 <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
-                            </div>
-                            <div class="col-sm-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox">
-                                    <label class="form-check-label"> Remember me
-                                    </label>
-                                </div>
+                                <input name="password1" id="password1" type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
                             </div>
                         </div>
                         <div class="form-row">
                             <button type="button" class="btn btn-secondary btn-sm ml-auto"  data-dismiss="modal" >Cancel</button>
-                            <input type="submit" class="btn btn-primary btn-sm ml-1" value="Log In"></input>        
+                            <input name="submit" id="submit" value="submit" type="submit" class="btn btn-primary btn-sm ml-1" value="Log In"></input>        
                         </div>
                     </form>
                 </div>
@@ -154,12 +289,21 @@
                     <h1 class="text-light display-3 font-weight-bold">LearnZone</h1>
                     <p>India's best online education platform which helps you to have best learning experience.</p>
                 </div>
+                
                 <div class="col-12 col-sm align-self-center">
-					<div class="form-group has-search">
-                        <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="Search courses">
-                      </div>
-				</div>
+                <form >
+                    <label for="cars">Available Courses</label>
+                    <select id="courses" name="courses">
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="JS">JS</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="Ajax">Ajax</option>
+                    </select>
+                </form>
+                </div>
+
                 <div class="col-12 col-sm align-self-center">
 					<img src="img/online-education.png" class="img-fluid">
                 </div>
