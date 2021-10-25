@@ -247,7 +247,7 @@ if(isset($_POST['Submit']))
                         
                         <div class="form-row">
                             <button type="button" class="btn btn-secondary btn-sm ml-auto"  data-dismiss="modal" >Cancel</button>
-                            <button type="Submit" name="Submit" value="submit" class="btn btn-primary btn-sm ml-1">Register</button>        
+                            <button type="submit" name="Submit" value="submit" class="btn btn-primary btn-sm ml-1">Register</button>        
                         </div>
                     </form>
                 </div>

@@ -28,10 +28,10 @@
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-                        <a class="nav-link" href="./index.html"> Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="./index.php"> Home<span class="sr-only">(current)</span></a>
                     </li>
-					<li class="nav-item"><a class="nav-link" href="./aboutus.html"></span> About</a></li>
-					<li class="nav-item"><a class="nav-link" href="./contactus.html"> Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="./aboutus.php"></span> About</a></li>
+					<li class="nav-item"><a class="nav-link" href="./contactus.php"> Contact</a></li>
                     
 				</ul>
                 
@@ -62,38 +62,121 @@
                     </form>
                 </div>
                 <?php
+                    session_start();
+
+                    $con=mysqli_connect('localhost','root','','learning_platform');
+                    $insert=false;
+             
+                    //check connection
+                    if(mysqli_connect_errno())
+                    {
+                        echo 'Failed to connect to database: '.mysqli_connect_error();
+                    }
+
                     if(isset($_POST['search1']))
                     {
+                        $emailid = $_SESSION['userLoggedInemail'];
                         $course= $_POST['course'];
+                        $showAlert = false;
+                        $enrollment_error= false;
+
                         if($course=='HTML')
                         {
-                            header("Location: HTML.php");
+                            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and html=1");
+                            $num = mysqli_num_rows($result1);
+            
+                            if ($num==1)
+                            {
+                                header("Location: HTML.php");
+                            }
+                            else
+                            {
+                                $enrollment_error = true;
+                            }
+                            
                         }
                         else if($course=='CSS')
                         {
-                            header("Location: CSS.php");
+                            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and css=1");
+                            $num = mysqli_num_rows($result1);
+            
+                            if ($num==1)
+                            {
+                                header("Location: CSS.php");
+                            }
+                            else
+                            {
+                                $enrollment_error = true;
+                            }
                         }
                         else if($course=='JS')
                         {
-                            header("Location: JS.php");
+                            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and js=1");
+                            $num = mysqli_num_rows($result1);
+            
+                            if ($num==1)
+                            {
+                                header("Location: JSS.php");
+                            }
+                            else
+                            {
+                                $enrollment_error = true;
+                            }
                         }
                         else if($course=='Java')
                         {
-                            header("Location: Java.php");
+                            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and java=1");
+                            $num = mysqli_num_rows($result1);
+            
+                            if ($num==1)
+                            {
+                                header("Location: Java.php");
+                            }
+                            else
+                            {
+                                $enrollment_error = true;
+                            }
                         }
                         else if($course=='Python')
                         {
-                            header("Location: Python.php");
+                            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and python=1");
+                            $num = mysqli_num_rows($result1);
+            
+                            if ($num==1)
+                            {
+                                header("Location: Python.php");
+                            }
+                            else
+                            {
+                                $enrollment_error = true;
+                            }
                         }
                         else if($course=='Ajax')
                         {
-                            header("Location: Ajax.php");
+                            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and ajax=1");
+                            $num = mysqli_num_rows($result1);
+            
+                            if ($num==1)
+                            {
+                                header("Location: Ajax.php");
+                            }
+                            else
+                            {
+                                $enrollment_error = true;
+                            }
                         }
                         else 
                         { 
                             $showAlert = true; 
                         }   
- 
+                        if($enrollment_error) {
+                            echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Error!</strong> You are not enrolled in the course, please enroll first.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                <span aria-hidden="true">×</span> 
+                                </button> 
+                            </div> '; 
+                        }
                         if($showAlert) {
                             echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Error!</strong> Course Not available
@@ -110,69 +193,315 @@
             </div>
         </div>
     </header>
-
-    <section id="myCourses">
-        <div class="ui container">
-            <div class="middle">
-                <h1>My courses</h1><br>
-
-                <?php
-                session_start();
-                $con=mysqli_connect('localhost','root','','learning_platform');
-                $insert=false;
+    <?php
+        $con=mysqli_connect('localhost','root','','learning_platform');
+        $insert=false;
+        $showAlert = false; 
              
-                //check connection
-                if(mysqli_connect_errno())
-                {
-                    echo 'Failed to connect to database: '.mysqli_connect_error();
-                } 
-                $emailid = $_SESSION['userLoggedInemail'];
-                $result = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid'");
-                //$userId = mysqli_fetch_assoc($result)['Id'];
-                echo("check1");
-                //Get all courses of current user
-               /* $courseQuery = "SELECT * FROM enrolled WHERE userId = '$userId'";
-                $courseResult = mysqli_query($con, $courseQuery);
-
-                if (mysqli_num_rows($courseResult) == 0) {
-                    echo "<h2>Congratulations for registering! Now Enroll in a course and start learning.</h2></br>";
-
-                    // View courses button
-                    echo "
-                        <div class='button'>
-                            <a class='ui primary button' id='view-courses-btn' href='courses.php'>View Courses</a>
-                        </div>";
-                } else {
-                    // User has enrolled in some courses
-                    while ($course = mysqli_fetch_assoc($courseResult)) {
-
-                        // Get course id
-                        $courseId = $course['courseId'];
-
-                        // Get course details
-                        $myCourseResult = mysqli_query($con, "SELECT * FROM course WHERE Id = '$courseId'");
-                        $myCourse = mysqli_fetch_assoc($myCourseResult);
-
-                        // Html card template
-                        echo "<div class='ui link cards' id='myCoursesCards'>" .
-                            "<div class='link card'>
-                                <div class='content'>
-                                    <div class='header'>" . $myCourse['title'] . "</div>
-                                    <div class='meta'>
-                                        <a>" . $myCourse['category'] . "</a>
-                                    </div><br>
-                                </div>
-                            
-                        </div>
-                        </div>";
-                    }
-                }*/
-                mysqli_close($con); 
+        //check connection
+        if(mysqli_connect_errno())
+        {
+            echo 'Failed to connect to database: '.mysqli_connect_error();
+        } 
                 
-                ?>
+        $emailid = $_SESSION['userLoggedInemail'];
+        
+        
+        if(isset($_POST['HTML']))
+        {
+            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and html=0");
+            $num = mysqli_num_rows($result1);
+            if ($num==1)
+            {
+                $sql="UPDATE user SET html= 1 WHERE emailid = '$emailid'";
+                $result = mysqli_query($con, $sql);
+                echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Successfully enrolled for HTML course. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+            }
+            else
+            {
+                $showAlert = true;
+            }
+            
+        }
+        if(isset($_POST['CSS']))
+        {
+            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and css=0");
+            $num = mysqli_num_rows($result1);
+            if ($num==1)
+            {
+                $sql="UPDATE user SET css= 1 WHERE emailid = '$emailid'";
+                $result = mysqli_query($con, $sql);
+                echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Successfully enrolled for CSS course. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+            }
+            else
+            {
+                $showAlert = true;
+            }
+            
+        }
+        if(isset($_POST['JS']))
+        {
+            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and js=0");
+            $num = mysqli_num_rows($result1);
+            if ($num==1)
+            {
+                $sql="UPDATE user SET js= 1 WHERE emailid = '$emailid'";
+                $result = mysqli_query($con, $sql);
+                echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Successfully enrolled for JS course. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+            }
+            else
+            {
+                $showAlert = true;
+            }
+            
+        }
+
+        if(isset($_POST['Java']))
+        {
+            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and java=0");
+            $num = mysqli_num_rows($result1);
+            if ($num==1)
+            {
+                $sql="UPDATE user SET java= 1 WHERE emailid = '$emailid'";
+                $result = mysqli_query($con, $sql);
+                echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Successfully enrolled for Java course. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+            }
+            else
+            {
+                $showAlert = true;
+            }
+            
+        }
+        if(isset($_POST['Python']))
+        {
+            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and python=0");
+            $num = mysqli_num_rows($result1);
+            if ($num==1)
+            {
+                $sql="UPDATE user SET python= 1 WHERE emailid = '$emailid'";
+                $result = mysqli_query($con, $sql);
+                echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Successfully enrolled for Python course. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+            }
+            else
+            {
+                $showAlert = true;
+            }
+            
+        }
+        if(isset($_POST['Ajax']))
+        {
+            $result1 = mysqli_query($con, "SELECT * FROM user WHERE emailid = '$emailid' and ajax=0");
+            $num = mysqli_num_rows($result1);
+            if ($num==1)
+            {
+                $sql="UPDATE user SET ajax= 1 WHERE emailid = '$emailid'";
+                $result = mysqli_query($con, $sql);
+                echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Successfully enrolled for Ajax course. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+            }
+            else
+            {
+                $showAlert = true;
+            }
+            
+        }
+        if($showAlert) {
+            echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Error!</strong> Already enrolled in the course. 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                            <span aria-hidden="true">×</span> 
+                        </button> 
+                    </div> '; 
+        }   
+        mysqli_close($con); 
+                
+    ?>
             </div>
         </div>
     </section>
+    <div class="container">
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 order-sm-last col-md-3">
+                <h3>HTML Crash Courses</h3>
+                <form name="html" method="post" action="user_view.php" >
+                    <div class="form-row">
+                        <button name="HTML" id="HTML" class="btn btn-sm btn-danger " type="submit" role="button" aria-pressed="true" >Enroll</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-sm order-sm-first col-md">
+				<div class="media">
+				<img class="d-flex mr-3 img-thumbnail align-self-center"
+							src="img/html.png" alt="html">
+					<div class="media-body ">
+                        <h2 class="mt-0">
+						    <a class="mt-0 text-dark" >HTML </a>
+                        </h2>
+						<p class="d-none d-sm-block">HTML stands for Hyper Text Markup Language. It is the standard markup language for creating Web pages. It describes the structure of a Web page. It consists of a series of elements. HTML elements tell the browser how to display the content</p>
+                    </div>
+				</div>
+            </div>
+        </div>
+
+    
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 col-md-3">
+                <h3>CSS for absolute beginners</h3>
+                <form name="css" method="post" action="user_view.php" >
+                    <div class="form-row">
+                        <button name="CSS" id="CSS" class="btn btn-sm btn-danger " type="submit" role="button" aria-pressed="true" >Enroll</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-sm col-md">
+				<div class="media">
+					<div class="media-body">
+						<h2 class="mt-0">
+                            <a class="mt-0 text-dark" >CSS </a>
+                        </h2>
+						<p class="d-none d-sm-block">CSS stands for Cascading Style Sheets. It describes how HTML elements are to be displayed on screen, paper, or in other media. It saves a lot of work. It can control the layout of multiple web pages all at once</p>
+                    </div>
+					<div class="media-right">
+						    <img class="d-flex mr-3 img-thumbnail align-self-center"
+							    src="img/css.png" alt="css">
+                        
+					</div>
+				</div>
+            </div>
+        </div>
+
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 order-sm-last col-md-3">
+                <h3>JS training courses</h3>
+                <form name="js" method="post" action="user_view.php" >
+                    <div class="form-row">
+                        <button name="JS" id="JS" class="btn btn-sm btn-danger " type="submit" role="button" aria-pressed="true" >Enroll</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-sm order-sm-first col-md">
+				<div class="media">
+					    <img class="d-flex mr-3 img-thumbnail align-self-center w-50"
+						    src="img/js.png" alt="js">
+					
+                    <div class="media-body">
+                        <a class="mt-0 text-dark" >
+						    <h2 class="mt-0">Java Script</h2>
+                            
+                        </a>
+						<p class="d-none d-sm-block" >JavaScript is the world's most popular programming language. It is the programming language of the Web. It is easy to learn.</p>
+                    </div>
+				</div>
+            </div>
+        </div> 
+
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 col-md-3">
+                <h3>Here is everything you ned to learn Java</h3>
+                <form name="java" method="post" action="user_view.php" >
+                    <div class="form-row">
+                        <button name="Java" id="Java" class="btn btn-sm btn-danger " type="submit" role="button" aria-pressed="true" >Enroll</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-sm col-md">
+				<div class="media">
+					<div class="media-body">
+						<h2 class="mt-0"><a class="mt-0 text-dark" >Java </a> </h2>
+						<p class="d-none d-sm-block">Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere. </p>
+                    </div>
+                    
+					<div class="media-right">
+						<img class="d-flex mr-3 img-thumbnail align-self-center"
+							src="img/java.png" alt="java">
+                        
+					</div>
+                    
+				</div>
+            </div>
+        </div>
+
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 order-sm-last col-md-3">
+                <h3>Full course of Ajax</h3>
+                <form name="ajax" method="post" action="user_view.php" >
+                    <div class="form-row">
+                        <button name="Ajax" id="Ajax" class="btn btn-sm btn-danger " type="submit" role="button" aria-pressed="true" >Enroll</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-sm order-sm-first col-md">
+				<div class="media">
+					<img class="d-flex mr-3 img-thumbnail align-self-center"
+						src="img/ajax.jpg" alt="ajax">
+                   
+					<div class="media-body">
+						<h2 class="mt-0">
+                            <a class="mt-0 text-dark"  >Ajax <span class="badge badge-danger">NEW</span> 
+                            </a>  
+                        </h2>
+						<p class="d-none d-sm-block" >Ajax, short for "Asynchronous JavaScript and is a set of web development techniques that uses various web technologies on the client-side to create asynchronous web applications.</p>
+                    </div>
+				</div>
+            </div>
+        </div> 
+
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 col-md-3">
+                <h3>Advanced Python programming</h3>
+                <form name="python" method="post" action="user_view.php" >
+                    <div class="form-row">
+                        <button name="Python" id="Python" class="btn btn-sm btn-danger " type="submit" role="button" aria-pressed="true" >Enroll</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-sm col-md">
+				<div class="media">
+					<div class="media-body">
+						<h2 class="mt-0"><a class="mt-0 text-dark"  >Python </a></h2>
+						<p class="d-none d-sm-block">Python is an interpreted high-level general-purpose programming language. Its design philosophy emphasizes code readability with its use of significant indentation.</p>
+                    </div>
+					<div class="media-right">
+                            <img class="d-flex mr-3 img-thumbnail align-self-center"
+							src="img/python.png" alt="python">
+                    
+						
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>	
+    
+    
     <footer class="footer">
         <div class="container">
             <div class="row">             
