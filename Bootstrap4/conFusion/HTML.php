@@ -99,17 +99,17 @@
                         </label>
                         <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb1" ><br>
                     
-                        <label class="progress_check form-check-label" for="htmlcb2"><a href="https://youtu.be/88PXJAA6szs" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Tutorial for Beginners by Edureka
-                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb2" >
+                        <label class=" form-check-label" for="htmlcb2"><a href="https://youtu.be/88PXJAA6szs" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Tutorial for Beginners by Edureka
+                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb2" >
                         </label><br>
-                        <label class="progress_check form-check-label" for="htmlcb3"><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course for Absolute Beginners by Traversy Media
-                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb3" >
+                        <label class=" form-check-label" for="htmlcb3"><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course for Absolute Beginners by Traversy Media
+                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb3" >
                         </label><br>
-                        <label class="progress_check form-check-label" for="htmlcb4"><a href="https://youtu.be/pQN-pnXPaVg" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Full Course by FreeCodeCamp
-                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb4" >
+                        <label class="form-check-label" for="htmlcb4"><a href="https://youtu.be/pQN-pnXPaVg" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Full Course by FreeCodeCamp
+                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb4" >
                         </label><br>
-                        <label class="progress_check form-check-label" for="htmlcb5"><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course by MOSH
-                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb5" >
+                        <label class="form-check-label" for="htmlcb5"><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course by MOSH
+                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb5" >
                         </label><br>
                         
                     </div> 
@@ -141,6 +141,7 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>
     <script src="js/filter.js"></script>
+    <script type="text/javascript"> var course = "<?php \"html\" ?>";</script>
     <script src="js/checkbox.js"></script>
     </body>
 </html>
