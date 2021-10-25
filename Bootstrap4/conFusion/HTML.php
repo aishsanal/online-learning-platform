@@ -141,7 +141,7 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>
     <script src="js/filter.js"></script>
-    <script type="text/javascript"> var course = "<?php \"html\" ?>";</script>
+    <script type="text/javascript"> var course = "<?php "html" ?>";</script>
     <script src="js/checkbox.js"></script>
     </body>
 </html>
