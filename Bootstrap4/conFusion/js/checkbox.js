@@ -35,14 +35,14 @@ $('.progress_check').click(function() {
 console.log(course);
 //Persistent checkboxes
 console.log(email);
-var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {};
+var checkboxValues = JSON.parse(localStorage.getItem(email)) || {};
 var $checkboxes = $("#progress :checkbox");
 
 $checkboxes.on("change", function(){
   $checkboxes.each(function(){
     checkboxValues[this.id] = this.checked;
   });
-  localStorage.setItem("emailid", JSON.stringify(checkboxValues));
+  localStorage.setItem(email, JSON.stringify(checkboxValues));
 });
 
 $.each(checkboxValues, function(key, value) {
