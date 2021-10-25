@@ -86,13 +86,33 @@
 
                 <div class="container my-5 ref video" >
                     <h2  >Video Recordings</h2>
-                    <div class="list-group ">
+                    <!-- <div class="list-group ">
                         <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=bWPMSSsVdPk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Learn HTML by Jake Wright</a></div>
                         <div class="list-group-item ref video "><a href="https://youtu.be/88PXJAA6szs" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> HTML Tutorial for Beginners by Edureka</a></div>
                         <div class="list-group-item ref video "><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> HTML Crash Course for Absolute Beginners by Traversy Media</a></div>
                         <div class="list-group-item ref video "><a href="https://youtu.be/pQN-pnXPaVg" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  HTML Full Course by FreeCodeCamp</a></div>
                         <div class="list-group-item ref video "><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img src="img/play.png" alt="" height="25" width="25"> HTML Crash Course by MOSH</a></div>
-                    </div>
+                    </div> -->
+
+                    <div class="form-check" id="progress">
+                        <label class="form-check-label" for="htmlcb1"><a href="https://www.youtube.com/watch?v=bWPMSSsVdPk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Learn HTML by Jake Wright
+                        </label>
+                        <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb1" ><br>
+                    
+                        <label class="progress_check form-check-label" for="htmlcb2"><a href="https://youtu.be/88PXJAA6szs" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Tutorial for Beginners by Edureka
+                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb2" >
+                        </label><br>
+                        <label class="progress_check form-check-label" for="htmlcb3"><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course for Absolute Beginners by Traversy Media
+                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb3" >
+                        </label><br>
+                        <label class="progress_check form-check-label" for="htmlcb4"><a href="https://youtu.be/pQN-pnXPaVg" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Full Course by FreeCodeCamp
+                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb4" >
+                        </label><br>
+                        <label class="progress_check form-check-label" for="htmlcb5"><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course by MOSH
+                            <input type="checkbox" class="form-check-input ml-5" id="htmlcb5" >
+                        </label><br>
+                        
+                    </div> 
                 </div>
 
                 <div class="container my-5 ref hide short">
@@ -116,9 +136,11 @@
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
 	<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    
 	<script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>
     <script src="js/filter.js"></script>
+    <script src="js/checkbox.js"></script>
     </body>
 </html>

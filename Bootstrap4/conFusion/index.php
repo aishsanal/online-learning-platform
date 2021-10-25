@@ -1,4 +1,4 @@
-<?php include('./includes/register_validation.php') ?>
+<?php //include('./includes/register_validation.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,41 +62,41 @@
                         
                             <div class="form-group ">
                                     <label class= "font-weight-bold" for="exampleInputEmail3">Email Address</label>
-                                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email">
-                                    <span class="error"><?php echo $emailErr;?></span>
+                                    <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email" required>
+                                    <!-- <span class="error"><?php //echo $emailErr;?></span> -->
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputFirstName3">First Name</label>
-                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name">
-                                <span class="error"><?php echo $fNameErr;?></span>
+                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name" required>
+                                <!-- <span class="error"><?php //echo $fNameErr;?></span> -->
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputLastName3">Last Name</label>
-                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name">
-                                <span class="error"><?php echo $lNameErr;?></span>
+                                <input type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name" required>
+                                <!-- <span class="error"><?php //echo $lNameErr;?></span> -->
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputphoneNumber3">Phone Number</label>
-                                <input type="tel" class="form-control form-control-sm mr-1" id="exampleInputPhoneNumber3" name = "phoneNumber"  placeholder = "Phone Number">
-                                <span class="error"><?php echo $phNumErr;?></span>
+                                <input type="tel" class="form-control form-control-sm mr-1" id="exampleInputPhoneNumber3" name = "phoneNumber"  placeholder = "Phone Number" required>
+                                <!-- <span class="error"><?php //echo $phNumErr;?></span> -->
                             </div>
 
                             <div class="form-group"> <!-- col-sm-6 -->
                                 <label class= "font-weight-bold" for="exampleInputPassword3">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "password" placeholder="Enter Password">
-                                <span class="error"><?php echo $pwErr;?></span>
+                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "password" placeholder="Enter Password" required>
+                                <!-- <span class="error"><?php //echo $pwErr;?></span> -->
                             </div>
 							<div class="form-group">
                                 <label class= "font-weight-bold" for="exampleInputPassword3">Confirm Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "confirmPassword" placeholder="Confirm Password">
-                                <span class="error"><?php echo $cpwErr;?></span>
+                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" name = "confirmPassword" placeholder="Confirm Password" required>
+                                <!-- <span class="error"><?php //echo $cpwErr;?></span> -->
                             </div>
                             <div class="col-sm-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox">
+                                    <input class="form-check-input" type="checkbox" required>
                                     <label class="form-check-label"> I accept the <a href = "./aboutus.php">Terms of Use</a> and <a href = "./aboutus.php">Privacy Policy</a>
                                     </label>
                                 </div>
