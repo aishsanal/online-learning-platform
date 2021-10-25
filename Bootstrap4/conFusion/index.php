@@ -204,20 +204,21 @@ if(isset($_POST['Submit']))
                         
                             <div class="form-group ">
                                     <label class= "font-weight-bold" for="exampleInputEmail3">Email Address</label>
-                                    <input name="emailid" id="emailid" type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email">
-                                    <span class="error"><?php echo $emailErr;?></span>
+                                    <input  name="emailid" id="emailid" type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" name="email" placeholder = "Enter email" required>
+                                    <!-- <span class="error"><?php //echo $emailErr;?></span> -->
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputFirstName3">First Name</label>
-                                <input name="Fname" id="Fname" type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name">
-                                <span class="error"><?php echo $fNameErr;?></span>
+                                <input name="Fname" id="Fname" type="text" class="form-control form-control-sm mr-1" id="exampleInputFirstName3" name="firstName" placeholder = "Enter First Name" required>
+                                <!-- <span class="error"><?php //echo $fNameErr;?></span> -->
                             </div>
 
                             <div class="form-group ">
                                 <label class= "font-weight-bold" for="exampleInputLastName3">Last Name</label>
-                                <input name="Lname" id="Lname" type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name">
-                                <span class="error"><?php echo $lNameErr;?></span>
+                                <input name="Lname" id="Lname" type="text" class="form-control form-control-sm mr-1" id="exampleInputLastName3" name = "lastName" placeholder="Enter Last Name" required>
+            
+                                <!-- <span class="error"><?php //echo $lNameErr;?></span> -->
                             </div>
 
                             <div class="form-group ">
@@ -238,7 +239,7 @@ if(isset($_POST['Submit']))
                             </div>
                             <div class="col-sm-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox">
+                                    <input class="form-check-input" type="checkbox" required>
                                     <label class="form-check-label"> I accept the <a href = "./aboutus.php">Terms of Use</a> and <a href = "./aboutus.php">Privacy Policy</a>
                                     </label>
                                 </div>
