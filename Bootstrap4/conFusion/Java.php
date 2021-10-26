@@ -1,20 +1,24 @@
 <?php
-if(isset($_POST['java']))
+session_start();
+$connect=mysqli_connect('localhost','root','','learning_platform');
+$insert=false;
+$showAlert = false; 
+
+$emailid = $_SESSION['userLoggedInemail'];
+//check connection
+if(mysqli_connect_errno())
 {
-    session_start();
-    $connect=mysqli_connect('localhost','root','','learning_platform');
-    $insert=false;
-    $showAlert = false; 
- 
-    //check connection
-    if(mysqli_connect_errno())
-    {
-        echo 'Failed to connect to database: '.mysqli_connect_error();
-    } 
+    echo 'Failed to connect to database: '.mysqli_connect_error();
+}
+$result1 = mysqli_query($connect, "SELECT * FROM user WHERE emailid = '$emailid' and java=1");
+$num = mysqli_num_rows($result1);
         
-    
-    $emailid = $_SESSION['userLoggedInemail'];
-    
+if ($num==0)
+{
+    header("Location: user_view.php");
+}
+if(isset($_POST['java']))
+{   
   
     if(in_array("javacb1", $_POST['java']) and in_array("javacb2", $_POST['java']) and in_array("javacb3", $_POST['java']) and in_array("javacb4", $_POST['java']) and in_array("javacb5", $_POST['java']))  
     {
@@ -69,15 +73,12 @@ if(isset($_POST['java']))
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-                <a class="navbar-brand mx-auto" href="index.php"><img src="img/online-education.png" height="30" width="41"></a>
+                <a class="navbar-brand mx-auto" href="./user_view.php"><img src="img/online-education.png" height="30" width="41"></a>
                 <div class="collapse navbar-collapse" id="Navbar">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.php"> Home<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="./aboutus.php"></span> About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="./contactus.php"> Contact</a></li>
-                        
+                            <a class="nav-link" href="user_view.php"> Home<span class="sr-only">(current)</span></a>
+                        </li>    
                     </ul>
                     
                 
