@@ -46,7 +46,8 @@ if(isset($_POST['css']))
                     </button> 
                 </div> '; 
     }
-}   
+}  
+$result2 = mysqli_query($connect,"SELECT Id,Fname,Lname FROM user WHERE css=1"); 
 ?>
 
 
@@ -117,7 +118,7 @@ if(isset($_POST['css']))
                                 <li class="sidebar-list nav-item filter_link list-group-item" data-filter="short"><a class="text-dark font-weight-bold" href="#">Short</a> </li>
                                 <li class="sidebar-list nav-item filter_link list-group-item" data-filter="medium"><a class="text-dark font-weight-bold" href="#">Medium</a> </li>
                                 <li class="sidebar-list nav-item filter_link list-group-item" data-filter="long"><a class="text-dark font-weight-bold" href="#">Long</a> </li>
-                                
+                                <li class="sidebar-list nav-item list-group-item"><button type="button" class="text-dark font-weight-bold px-0 btn btn-link" data-toggle="collapse" data-target="#userTable"> Users</button></li>
                             </ul>
                         </div>
                     </div>
@@ -179,7 +180,39 @@ if(isset($_POST['css']))
                     <div class="list-group-item ref hide video long"><a href="https://www.youtube.com/watch?v=1Rs2ND1ryYc" target="_blank"><img src="img/play.png" alt="" height="25" width="25">CSS Tutorial - Zero to Hero by FreeCodeCamp</a></div>                </div>
             </div>
         </div>
+        <div id="userTable" class="container my-5 collapse">
+            <h3>Users</h3>
+        <table class="table table-striped" >                     
+            <div class="table responsive">
+                <thead>
+                <tr>
+                <th>UserId</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        if ($result2->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result2->fetch_assoc()) {
+                        
+                        
+                                echo '<tr>
+                                          <td scope="row">' . $row["Id"]. '</td>
+                                          <td>' . $row["Fname"] .'</td>
+                                          <td> '.$row["Lname"] .'</td>
+                                        </tr>';
+                            }
+                        } else {
+                            echo "0 results";
+                        } 
+                    ?>
 
+                </tbody>
+            </div>
+        </table>
+        </div>
         <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
 	<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
 	<script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
