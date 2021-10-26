@@ -19,16 +19,21 @@ $('.progress_check').click(function() {
     
     if(flag==1)
         var status = confirm("Wooohoo!! You mastered the course. Are you sure you want to deregister?");
-        console.log(course);
+        //console.log(course);
         if(status){
             //Connecting to the database
             var dbConnection = SQL.connect( { Driver: "MySQL",
             Host: "localhost",
-            Port: 80,
+            Port: 3306,
             Database: "learning_platform",
             UserName: "root",
             Password: "" } );
-            var sql = "UPDATE user SET "
+            var sql = "UPDATE user SET course=0 WHERE emailid = email";
+            var result = dbConnection.query(sql);
+            if(result.isValid){
+                console.log("success");
+            }
+            dbConnection.close();
         }
     })
 
