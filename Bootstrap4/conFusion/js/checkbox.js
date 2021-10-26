@@ -1,3 +1,4 @@
+//Progress Check
 $('.progress_check').click(function() {
     var form = document.getElementById('progress');
     var inputs = form.getElementsByTagName('input');
@@ -18,27 +19,35 @@ $('.progress_check').click(function() {
     
     if(flag==1)
         var status = confirm("Wooohoo!! You mastered the course. Are you sure you want to deregister?");
-        console.log(course);
+        //console.log(course);
         if(status){
             //Connecting to the database
             var dbConnection = SQL.connect( { Driver: "MySQL",
             Host: "localhost",
-            Port: 80,
+            Port: 3306,
             Database: "learning_platform",
             UserName: "root",
             Password: "" } );
-            var sql = "UPDATE user SET "
+            var sql = "UPDATE user SET course=0 WHERE emailid = email";
+            var result = dbConnection.query(sql);
+            if(result.isValid){
+                console.log("success");
+            }
+            dbConnection.close();
         }
     })
 
-var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {};
+console.log(course);
+//Persistent checkboxes
+console.log(email);
+var checkboxValues = JSON.parse(localStorage.getItem(email)) || {};
 var $checkboxes = $("#progress :checkbox");
 
 $checkboxes.on("change", function(){
   $checkboxes.each(function(){
     checkboxValues[this.id] = this.checked;
   });
-  localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+  localStorage.setItem(email, JSON.stringify(checkboxValues));
 });
 
 $.each(checkboxValues, function(key, value) {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 if(isset($_POST['html']))
 {
@@ -45,6 +46,9 @@ if(isset($_POST['html']))
 }   
 ?>
 
+=======
+<?php session_start(); ?>
+>>>>>>> 11e095de9f0d84d2d82354960b48bbab0cb6d1fe
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -193,6 +197,11 @@ if(isset($_POST['html']))
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>
     <script src="js/filter.js"></script>
+<<<<<<< HEAD
+=======
+    <script type="text/javascript"> var course = "html";</script>
+    <script type="text/javascript"> var email = "<?= $_SESSION['userLoggedInemail']?>";</script>
+>>>>>>> 11e095de9f0d84d2d82354960b48bbab0cb6d1fe
     <script src="js/checkbox.js"></script>
     </body>
 </html>
