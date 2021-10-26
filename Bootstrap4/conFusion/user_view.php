@@ -32,6 +32,7 @@
                     </li>
 					<li class="nav-item"><a class="nav-link" href="./aboutus.php"></span> About</a></li>
 					<li class="nav-item"><a class="nav-link" href="./contactus.php"> Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./users.php">Users</a></li>
                     
 				</ul>
                 
