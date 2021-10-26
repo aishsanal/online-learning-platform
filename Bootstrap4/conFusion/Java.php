@@ -1,3 +1,50 @@
+<?php
+if(isset($_POST['java']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+    $showAlert = false; 
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    
+    $emailid = $_SESSION['userLoggedInemail'];
+    
+  
+    if(in_array("javacb1", $_POST['java']) and in_array("javacb2", $_POST['java']) and in_array("javacb3", $_POST['java']) and in_array("javacb4", $_POST['java']) and in_array("javacb5", $_POST['java']))  
+    {
+        
+        $sql="UPDATE user SET java= 0 WHERE emailid = '$emailid'";
+        $result = mysqli_query($connect, $sql);
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have been successfully deregistered. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> ';
+        header("Location: user_view.php");
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> You have not completed all courses.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -83,16 +130,33 @@
                         <div class="list-group-item "><a href="https://www.w3schools.com/java/" target="_blank"><img src="img/link.png" alt="" height="25" width="25"> Java Tutorial -W3Schools</a></div>
                     </div>
                 </div>
-
                 <div class="container my-5 ref video" >
                     <h2  >Video Recordings</h2>
-                    <div class="list-group ">
-                        <div class="list-group-item ref video "><a href="https://youtu.be/mAtkPQO1FcA" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Java in 5 Mins -Simplilearn </a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/7GwptabrYyk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Java OOPS Concepts by Edureka</a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Java in 14 Minutes - Alex Lee</a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/xk4_1vDrzzo" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Java Full Course by BroCode</a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/eIrMbAQSU34" target="_blank"><img src="img/play.png" alt="" height="25" width="25"> Java Tutorial by MOSH</a></div>
-                    </div>
+
+                    <form class="form-check" name="java" id="java" method="post" action="Java.php">
+                        <label class="form-check-label" for="javacb1"><a href="https://youtu.be/mAtkPQO1FcA" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Java in 5 Mins -Simplilearn </a>
+                            <input type="checkbox" name="java[]" value="javacb1">
+                        </label><br>
+                        <label class=" form-check-label" for="javacb2"><a href="https://youtu.be/7GwptabrYyk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Java OOPS Concepts by Edureka</a>
+                            <input type="checkbox" name="java[]" value="javacb2">
+                        </label><br>
+                        <label class=" form-check-label" for="javacb3"><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Java in 14 Minutes - Alex Lee</a>
+                            <input type="checkbox" name="java[]" value="javacb3">
+                        </label><br>
+                        <label class="form-check-label" for="javacb4"><a href="https://youtu.be/xk4_1vDrzzo" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Java Full Course by BroCode</a>
+                            <input type="checkbox" name="java[]" value="javacb4">
+                        </label><br>
+                        <label class="form-check-label" for="javacb5"><a href="https://youtu.be/eIrMbAQSU34" target="_blank"><img src="img/play.png" alt="" height="25" width="25"> Java Tutorial by MOSH</a>
+                            <input type="checkbox" name="java[]" value="javacb5">
+                        </label><br>
+                        <br>
+                        <label>
+                        Finished course? Want to de-register?
+                        <input name="java[]" id="Yes" value="Yes" type="submit" class="btn btn-primary btn-sm ml-1"></input>
+                        <!--input type="submit" name="Completed" id="Completed" value="Completed"-->
+                        </label>
+                        
+                        </form> 
                 </div>
 
                 <div class="container my-5 ref hide short">

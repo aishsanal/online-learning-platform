@@ -1,3 +1,50 @@
+<?php
+if(isset($_POST['html']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+    $showAlert = false; 
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    
+    $emailid = $_SESSION['userLoggedInemail'];
+    
+  
+    if(in_array("htmlcb1", $_POST['html']) and in_array("htmlcb2", $_POST['html']) and in_array("htmlcb3", $_POST['html']) and in_array("htmlcb4", $_POST['html']) and in_array("htmlcb5", $_POST['html']))  
+    {
+        
+        $sql="UPDATE user SET html= 0 WHERE emailid = '$emailid'";
+        $result = mysqli_query($connect, $sql);
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have been successfully deregistered. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> ';
+        header("Location: user_view.php");
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> You have not completed all courses.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -94,25 +141,30 @@
                         <div class="list-group-item ref video "><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img src="img/play.png" alt="" height="25" width="25"> HTML Crash Course by MOSH</a></div>
                     </div> -->
 
-                    <div class="form-check" id="progress">
-                        <label class="form-check-label" for="htmlcb1"><a href="https://www.youtube.com/watch?v=bWPMSSsVdPk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Learn HTML by Jake Wright
+                    <form class="form-check" name="html" id="html" method="post" action="HTML.php">
+                        <label class="form-check-label" for="htmlcb1"><a href="https://www.youtube.com/watch?v=bWPMSSsVdPk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Learn HTML by Jake Wright     
+                        <input type="checkbox" name="html[]" value="htmlcb1">
+                        </label><br>
+                        <label class=" form-check-label" for="htmlcb2"><a href="https://youtu.be/88PXJAA6szs" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  HTML Tutorial for Beginners by Edureka
+                            <input type="checkbox" name="html[]" value="htmlcb2">
+                        </label><br>
+                        <label class=" form-check-label" for="htmlcb3"><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  HTML Crash Course for Absolute Beginners by Traversy Media
+                            <input type="checkbox" name="html[]" value="htmlcb3">
+                        </label><br>
+                        <label class="form-check-label" for="htmlcb4"><a href="https://youtu.be/pQN-pnXPaVg" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  HTML Full Course by FreeCodeCamp
+                            <input type="checkbox" name="html[]" value="htmlcb4">
+                        </label><br>
+                        <label class="form-check-label" for="htmlcb5"><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  HTML Crash Course by MOSH
+                            <input type="checkbox" name="html[]" value="htmlcb5">
+                        </label><br>
+                        <br>
+                        <label>
+                        Finished course? Want to de-register?
+                        <input name="html[]" id="Yes" value="Yes" type="submit" class="btn btn-primary btn-sm ml-1"></input>
+                        <!--input type="submit" name="Completed" id="Completed" value="Completed"-->
                         </label>
-                        <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb1" ><br>
-                    
-                        <label class=" form-check-label" for="htmlcb2"><a href="https://youtu.be/88PXJAA6szs" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Tutorial for Beginners by Edureka
-                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb2" >
-                        </label><br>
-                        <label class=" form-check-label" for="htmlcb3"><a href="https://youtu.be/UB1O30fR-EE" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course for Absolute Beginners by Traversy Media
-                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb3" >
-                        </label><br>
-                        <label class="form-check-label" for="htmlcb4"><a href="https://youtu.be/pQN-pnXPaVg" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Full Course by FreeCodeCamp
-                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb4" >
-                        </label><br>
-                        <label class="form-check-label" for="htmlcb5"><a href="https://youtu.be/qz0aGYrrlhU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">HTML Crash Course by MOSH
-                            <input type="checkbox" class="progress_check form-check-input ml-5" id="htmlcb5" >
-                        </label><br>
                         
-                    </div> 
+                        </form> 
                 </div>
 
                 <div class="container my-5 ref hide short">
@@ -141,7 +193,6 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>
     <script src="js/filter.js"></script>
-    <script type="text/javascript"> var course = "<?php \"html\" ?>";</script>
     <script src="js/checkbox.js"></script>
     </body>
 </html>

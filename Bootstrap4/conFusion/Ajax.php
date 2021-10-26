@@ -1,3 +1,50 @@
+<?php
+if(isset($_POST['ajax']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+    $showAlert = false; 
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    
+    $emailid = $_SESSION['userLoggedInemail'];
+    
+  
+    if(in_array("ajaxcb1", $_POST['ajax']) and in_array("ajaxcb2", $_POST['ajax']) and in_array("ajaxcb3", $_POST['ajax']) and in_array("ajaxcb4", $_POST['ajax']) )  
+    {
+        
+        $sql="UPDATE user SET ajax= 0 WHERE emailid = '$emailid'";
+        $result = mysqli_query($connect, $sql);
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have been successfully deregistered. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> ';
+        header("Location: user_view.php");
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> You have not completed all courses.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -86,13 +133,28 @@
 
                 <div class="container my-5 ref video" >
                     <h2  >Video Recordings</h2>
-                    <div class="list-group ">
-                        <div class="list-group-item ref video "><a href="https://youtu.be/tNKD0kfel6o" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Ajax Introduction</a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/5MmEUWfuZFk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Learn Ajax in 15 Mins</a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/82hnvUYY6QA" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Ajax Crash Course by Traversy Media</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=ACNGhBfNftA&list=PLgp11Hu-N4DT59rXjR57hhy6pMH3I2yHU" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Ajax Training</a></div>
+
+                    <form class="form-check" name="ajax" id="ajax" method="post" action="Ajax.php">
+                        <label class="form-check-label" for="jscb1"><a href="https://youtu.be/tNKD0kfel6o" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Ajax Introduction</a>
+                            <input type="checkbox" name="ajax[]" value="ajaxcb1">
+                        </label><br>
+                        <label class=" form-check-label" for="ajaxcb2"><a href="https://youtu.be/5MmEUWfuZFk" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Learn Ajax in 15 Mins</a>
+                            <input type="checkbox" name="ajax[]" value="ajaxcb2">
+                        </label><br>
+                        <label class=" form-check-label" for="ajaxcb3"><a href="https://youtu.be/82hnvUYY6QA" target="_blank"><img  src="img/play.png" alt="" height="25" width="25"> Ajax Crash Course by Traversy Media</a>
+                            <input type="checkbox" name="ajax[]" value="ajaxcb3">
+                        </label><br>
+                        <label class="form-check-label" for="ajaxcb4"><a href="https://www.youtube.com/watch?v=ACNGhBfNftA&list=PLgp11Hu-N4DT59rXjR57hhy6pMH3I2yHU" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Ajax Training</a>
+                            <input type="checkbox" name="ajax[]" value="ajaxcb4">
+                        </label><br>
+                        <br>
+                        <label>
+                        Finished course? Want to de-register?
+                        <input name="ajax[]" id="Yes" value="Yes" type="submit" class="btn btn-primary btn-sm ml-1"></input>
+                        <!--input type="submit" name="Completed" id="Completed" value="Completed"-->
+                        </label>
                         
-                    </div>
+                        </form> 
                 </div>
 
                 <div class="container my-5 ref hide short">

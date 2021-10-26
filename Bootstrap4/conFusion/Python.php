@@ -1,3 +1,51 @@
+<?php
+if(isset($_POST['python']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+    $showAlert = false; 
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    
+    $emailid = $_SESSION['userLoggedInemail'];
+    
+  
+    if(in_array("pythoncb1", $_POST['python']) and in_array("pythoncb2", $_POST['python']) and in_array("pythoncb3", $_POST['python']) and in_array("pythoncb4", $_POST['python']) and in_array("pythoncb5", $_POST['python']))  
+    {
+        
+        $sql="UPDATE user SET python= 0 WHERE emailid = '$emailid'";
+        $result = mysqli_query($connect, $sql);
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have been successfully deregistered. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> ';
+        header("Location: user_view.php");
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> You have not completed all courses.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -86,13 +134,31 @@
 
                 <div class="container my-5 ref video" >
                     <h2  >Video Recordings</h2>
-                    <div class="list-group ">
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=I2wURDqiXdM" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Learn Python in 5 Minutes</a></div>
-                        <div class="list-group-item ref video "><a href="https://youtu.be/WvhQhj4n6b8" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Python Tutorial for Beginners by Edureka</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=woVJ4N5nl_s" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Python Basics by Edureka</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Python Full Course by FreeCodeCamp</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=_uQrJ0TkZlc" target="_blank"><img src="img/play.png" alt="" height="25" width="25"> Python Crash Course by MOSH</a></div>
-                    </div>
+
+                    <form class="form-check" name="python" id="python" method="post" action="Python.php">
+                        <label class="form-check-label" for="pythoncb1"><a href="https://www.youtube.com/watch?v=I2wURDqiXdM" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Learn Python in 5 Minutes</a>
+                            <input type="checkbox" name="python[]" value="pythoncb1">
+                        </label><br>
+                        <label class=" form-check-label" for="pythoncb2"><a href="https://youtu.be/WvhQhj4n6b8" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Python Tutorial for Beginners by Edureka</a>
+                            <input type="checkbox" name="python[]" value="pythoncb2">
+                        </label><br>
+                        <label class=" form-check-label" for="pythoncb3"><a href="https://www.youtube.com/watch?v=woVJ4N5nl_s" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">  Python Basics by Edureka</a>
+                            <input type="checkbox" name="python[]" value="pythoncb3">
+                        </label><br>
+                        <label class="form-check-label" for="pythoncb4"><a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank"><img src="img/play.png" alt="" height="25" width="25">  Python Full Course by FreeCodeCamp</a>
+                            <input type="checkbox" name="python[]" value="pythoncb4">
+                        </label><br>
+                        <label class="form-check-label" for="pythoncb5"><a href="https://www.youtube.com/watch?v=_uQrJ0TkZlc" target="_blank"><img src="img/play.png" alt="" height="25" width="25"> Python Crash Course by MOSH</a>
+                            <input type="checkbox" name="python[]" value="pythoncb5">
+                        </label><br>
+                        <br>
+                        <label>
+                        Finished course? Want to de-register?
+                        <input name="python[]" id="Yes" value="Yes" type="submit" class="btn btn-primary btn-sm ml-1"></input>
+                        <!--input type="submit" name="Completed" id="Completed" value="Completed"-->
+                        </label>
+                        
+                        </form> 
                 </div>
 
                 <div class="container my-5 ref hide short">

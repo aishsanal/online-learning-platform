@@ -116,7 +116,7 @@
             
                             if ($num==1)
                             {
-                                header("Location: JSS.php");
+                                header("Location: JS.php");
                             }
                             else
                             {

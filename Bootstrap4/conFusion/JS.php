@@ -1,3 +1,50 @@
+<?php
+if(isset($_POST['js']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+    $showAlert = false; 
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    
+    $emailid = $_SESSION['userLoggedInemail'];
+    
+  
+    if(in_array("jscb1", $_POST['js']) and in_array("jscb2", $_POST['js']) and in_array("jscb3", $_POST['js']) and in_array("jscb4", $_POST['js']) and in_array("jscb5", $_POST['js']))  
+    {
+        
+        $sql="UPDATE user SET js= 0 WHERE emailid = '$emailid'";
+        $result = mysqli_query($connect, $sql);
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have been successfully deregistered. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> ';
+        header("Location: user_view.php");
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> You have not completed all courses.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -83,17 +130,36 @@
                         
                     </div>
                 </div>
-
+                
                 <div class="container my-5 ref video" >
                     <h2  >Video Recordings</h2>
-                    <div class="list-group ">
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=Ia0FSogTRaw" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">What is JS by Edureka</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=W6NZfCO5SIk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Javascript Tutorial for Beginners by MOSH</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=pU722vRd66A" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">JavaScript Tutorial for Beginners by Telusko</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=o1IaduQICO0" target="_blank"><img src="img/play.png" alt="" height="25" width="25">JavaScript Full Course by Edureka</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=PkZNo7MFNFg" target="_blank"><img src="img/play.png" alt="" height="25" width="25">Learn Javascript - Full Course for Beginners by FreeCodeCamp</a></div>
-                    </div>
+
+                    <form class="form-check" name="js" id="js" method="post" action="JS.php">
+                        <label class="form-check-label" for="jscb1"><a href="https://www.youtube.com/watch?v=Ia0FSogTRaw" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">What is JS by Edureka</a>
+                            <input type="checkbox" name="js[]" value="jscb1">
+                        </label><br>
+                        <label class=" form-check-label" for="jscb2"><a href="https://www.youtube.com/watch?v=W6NZfCO5SIk" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Javascript Tutorial for Beginners by MOSH</a>
+                            <input type="checkbox" name="js[]" value="jscb2">
+                        </label><br>
+                        <label class=" form-check-label" for="jscb3"><a href="https://www.youtube.com/watch?v=pU722vRd66A" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">JavaScript Tutorial for Beginners by Telusko</a>
+                            <input type="checkbox" name="js[]" value="jscb3">
+                        </label><br>
+                        <label class="form-check-label" for="jscb4"><a href="https://www.youtube.com/watch?v=o1IaduQICO0" target="_blank"><img src="img/play.png" alt="" height="25" width="25">JavaScript Full Course by Edureka</a>
+                            <input type="checkbox" name="js[]" value="jscb4">
+                        </label><br>
+                        <label class="form-check-label" for="jscb5"><a href="https://www.youtube.com/watch?v=PkZNo7MFNFg" target="_blank"><img src="img/play.png" alt="" height="25" width="25">Learn Javascript - Full Course for Beginners by FreeCodeCamp</a>
+                            <input type="checkbox" name="js[]" value="jscb5">
+                        </label><br>
+                        <br>
+                        <label>
+                        Finished course? Want to de-register?
+                        <input name="js[]" id="Yes" value="Yes" type="submit" class="btn btn-primary btn-sm ml-1"></input>
+                        <!--input type="submit" name="Completed" id="Completed" value="Completed"-->
+                        </label>
+                        
+                        </form> 
                 </div>
+
 
                 <div class="container my-5 ref hide short">
                     <h2> Short Videos</h2>

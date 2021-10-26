@@ -1,3 +1,51 @@
+<?php
+if(isset($_POST['css']))
+{
+    session_start();
+    $connect=mysqli_connect('localhost','root','','learning_platform');
+    $insert=false;
+    $showAlert = false; 
+ 
+    //check connection
+    if(mysqli_connect_errno())
+    {
+        echo 'Failed to connect to database: '.mysqli_connect_error();
+    } 
+        
+    
+    $emailid = $_SESSION['userLoggedInemail'];
+    
+  
+    if(in_array("csscb1", $_POST['css']) and in_array("csscb2", $_POST['css']) and in_array("csscb3", $_POST['css']) and in_array("csscb4", $_POST['css']) and in_array("csscb5", $_POST['css']))  
+    {
+        
+        $sql="UPDATE user SET css= 0 WHERE emailid = '$emailid'";
+        $result = mysqli_query($connect, $sql);
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have been successfully deregistered. 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> ';
+        header("Location: user_view.php");
+    }   
+    else 
+    { 
+        $showAlert = true; 
+    }   
+ 
+    if($showAlert) {
+        echo '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> You have not completed all courses.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                        <span aria-hidden="true">×</span> 
+                    </button> 
+                </div> '; 
+    }
+}   
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -86,13 +134,31 @@
 
                 <div class="container my-5 ref video" >
                     <h2  >Video Recordings</h2>
-                    <div class="list-group ">
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=6vbgZnQrpbU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">What is CSS by Edureka</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=1PnVor36_40" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Learn CSS in 20 minutes by Web Dev Simplified</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=yfoY53QXEnI" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">CSS Crash Course for Absolute Beginners by Traversy Media</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=KN6oBEOz2ZI" target="_blank"><img src="img/play.png" alt="" height="25" width="25">CSS Crash Course for Absolute Beginners - Full Course by Clever Programmer</a></div>
-                        <div class="list-group-item ref video "><a href="https://www.youtube.com/watch?v=1Rs2ND1ryYc" target="_blank"><img src="img/play.png" alt="" height="25" width="25">CSS Tutorial - Zero to Hero by FreeCodeCamp</a></div>
-                    </div>
+
+                    <form class="form-check" name="css" id="css" method="post" action="CSS.php">
+                        <label class="form-check-label" for="csscb1"><a href="https://www.youtube.com/watch?v=6vbgZnQrpbU" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">What is CSS by Edureka</a>
+                            <input type="checkbox" name="css[]" value="csscb1">
+                        </label><br>
+                        <label class=" form-check-label" for="csscb2"><a href="https://www.youtube.com/watch?v=1PnVor36_40" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">Learn CSS in 20 minutes by Web Dev Simplified</a>
+                            <input type="checkbox" name="css[]" value="csscb2">
+                        </label><br>
+                        <label class=" form-check-label" for="csscb3"><a href="https://www.youtube.com/watch?v=yfoY53QXEnI" target="_blank"><img  src="img/play.png" alt="" height="25" width="25">CSS Crash Course for Absolute Beginners by Traversy Media</a>
+                            <input type="checkbox" name="css[]" value="csscb3">
+                        </label><br>
+                        <label class="form-check-label" for="csscb4"><a href="https://www.youtube.com/watch?v=KN6oBEOz2ZI" target="_blank"><img src="img/play.png" alt="" height="25" width="25">CSS Crash Course for Absolute Beginners - Full Course by Clever Programmer</a>
+                            <input type="checkbox" name="css[]" value="csscb4">
+                        </label><br>
+                        <label class="form-check-label" for="csscb5"><a href="https://www.youtube.com/watch?v=1Rs2ND1ryYc" target="_blank"><img src="img/play.png" alt="" height="25" width="25">CSS Tutorial - Zero to Hero by FreeCodeCamp</a>
+                            <input type="checkbox" name="css[]" value="csscb5">
+                        </label><br>
+                        <br>
+                        <label>
+                        Finished course? Want to de-register?
+                        <input name="css[]" id="Yes" value="Yes" type="submit" class="btn btn-primary btn-sm ml-1"></input>
+                        <!--input type="submit" name="Completed" id="Completed" value="Completed"-->
+                        </label>
+                        
+                        </form> 
                 </div>
 
                 <div class="container my-5 ref hide short">
